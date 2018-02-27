@@ -1,0 +1,659 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <accordion>
+                <accordion-group isOpened="true">
+                    <accordion-heading id="accordion1" (click)="onclicktoggle('accordion1')">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">
+                                <span id="icon1" class="glyphicon glyphicon-minus"></span> OWS Oil and Gas Cash Flow Calculator
+                            </h2>
+                        </div>
+                    </accordion-heading>
+                    <div class="panel-body">
+
+                        <div class="row">
+                            <div class="col-md-9">
+                                <h4>
+                                    Input values into this interactive calculator to create unique investment and cash flow scenarios.
+                                </h4>
+                            </div>
+                            <div class="col-md-3">
+                                <img src="assets/logo.png" width="200px" />
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class="row" *ngIf="!mobileView">
+                            <div class="col-md-6" style="margin-left: 15px; padding: 20px 0px 10px 25px; border: 1px solid black">
+
+                                <div class="row">
+                                    <div class="col-md-12" style="text-align:center; padding-bottom: 30px;">
+                                        <b>INVESTMENT AMOUNT AND TERMS</b>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="min-height:45px">
+                                    <div class="col-md-6">
+                                        <b>Investment Amount:</b>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <input type="number" [(ngModel)]="Hypothetical_investment_model" min="0" (change)="hypothetical()" min="0" class="form-control"
+                                            />
+                                            <span class="input-group-addon" style="font-weight:bold">&nbsp;$&nbsp;&nbsp;</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="min-height:45px">
+                                    <div class="col-md-6">
+                                        <b>Net Revenue Interest:</b>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <input type="number" [(ngModel)]="nri_percentage" min="0" (change)="hypothetical()" min="0" class="form-control" />
+                                            <span class="input-group-addon" style="font-weight:bold">%&nbsp;</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="min-height:45px">
+                                    <div class="col-md-6">
+                                        <b>Operating Expenses Ratio:</b>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <input type="number" min="0" max="100" [(ngModel)]="Operating_Expenses_Ratio" (change)="hypothetical()" class="form-control"
+                                            />
+                                            <span class="input-group-addon" style="font-weight:bold; font-size: 16px">%&nbsp;</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="min-height:45px">
+                                    <div class="col-md-6">
+                                        <b>State O&G Production Taxes:</b>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <select class="form-control" name="taxValue" (change)="onChange($event.target.value)">
+                                            <option *ngFor="let item of options" [value]="item.taxValue">
+                                                {{ item.stateName }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <img src="assets/no-preview.png" width="100%" height="260px" />
+                                <!--<canvas id="myChart" width="400" height="400"></canvas> -->
+                            </div>
+                        </div>
+
+                        <div class="row" *ngIf="mobileView">
+                            <div class="col-md-6">
+                                Sample Text
+                            </div>
+                            <div class="col-md-6" style="padding:20px 10px 20px 10px;  border: 1px solid black">
+
+                                <div class="row">
+                                    <div class="col-md-12" style="text-align:center; padding-bottom: 30px;">
+                                        <b>INVESTMENT AMOUNT AND TERMS</b>
+                                    </div>
+                                </div>
+                                <div class="row" style="min-height:45px">
+                                    <div class="col-md-6">
+                                        <b>Investment Amount:</b>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <input type="number" [(ngModel)]="Hypothetical_investment_model" min="0" (change)="hypothetical()" min="0" class="form-control"
+                                            />
+                                            <span class="input-group-addon" style="font-weight:bold">&nbsp;$&nbsp;&nbsp;</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="min-height:45px">
+                                    <div class="col-md-6">
+                                        <b>Net Revenue Interest:</b>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <input type="number" [(ngModel)]="nri_percentage" min="0" (change)="hypothetical()" min="0" class="form-control" />
+                                            <span class="input-group-addon" style="font-weight:bold">%&nbsp;</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="min-height:45px">
+                                    <div class="col-md-6">
+                                        <b>Operating Expenses Ratio:</b>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <input type="number" min="0" max="100" [(ngModel)]="Operating_Expenses_Ratio" (change)="hypothetical()" class="form-control"
+                                            />
+                                            <span class="input-group-addon" style="font-weight:bold; font-size: 16px">%&nbsp;</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="min-height:45px">
+                                    <div class="col-md-6">
+                                        <b>State O&G Production Taxes:</b>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <select class="form-control" name="taxValue" (change)="onChange($event.target.value)">
+                                            <option *ngFor="let item of options" [value]="item.taxValue">
+                                                {{ item.stateName }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div style="height: 30px; background: silver; text-align:center">
+                                    <h3>Prices & Production Rates</h3>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class="row">
+                            <div class="col-md-1">
+                                <div class="row">
+                                    <div style="text-align:center" class="col-md-12">
+                                        <b>OIL</b>
+                                    </div>
+                                    <div class="col-md-12" style="text-align:center">
+                                        <img src="assets/oil.png">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-5">
+                                <div class="row" style="min-height:45px">
+                                    <div class="col-md-6">
+                                        <b>Estimated Oil Price:</b>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <input type="number" [(ngModel)]="Estimated_oil_price_model" min="0" (change)="hypothetical()" class="form-control" />
+                                            <span class="input-group-addon" style="font-weight:bold; font-size: 16px">&nbsp;$&nbsp;&nbsp;</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6"></div>
+                                    <div class="col-md-6">
+
+                                    </div>
+                                </div>
+
+                                <div class="row" style="min-height:50px">
+                                    <div class="col-md-6">
+                                        <b>Estimated Daily Oil Production:</b>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <input type="number" [(ngModel)]="Estimated_oil_model" min="0" (change)="hypothetical()" class="form-control" />
+                                            <span class="input-group-addon" style="font-weight:bold">BO</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="min-height:50px">
+                                    <div class="col-md-6">
+                                        <b>Estimated Total Oil Production:</b>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <input type="number" [(ngModel)]="Estimated_Oil_ultimate_recovery_model" min="0" (change)="hypothetical()" class="form-control"
+                                            />
+                                            <span class="input-group-addon" style="font-weight:bold">BO</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <br>
+                            </div>
+
+                            <div class="col-md-1">
+                                <div class="row">
+                                    <div style="text-align:center" class="col-md-12">
+                                        <b>GAS</b>
+                                    </div>
+                                    <div class="col-md-12" style="text-align:center">
+                                        <img src="assets/gas.png">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-5">
+                                <div class="row" style="min-height:45px">
+                                    <div class="col-md-6">
+                                        <b>Estimated Gas Price:</b>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <input type="number" [(ngModel)]="Estimated_gas_price_model" min="0" (change)="hypothetical()" class="form-control" />
+                                            <span class="input-group-addon" style="font-weight:bold; font-size: 16px">&nbsp;&nbsp;$&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6"></div>
+                                    <div class="col-md-6">
+                                    </div>
+                                </div>
+
+                                <div class="row" style="min-height:50px">
+                                    <div class="col-md-6">
+                                        <b>Estimated Daily Gas Production:</b>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <input type="number" [(ngModel)]="Estimated_gas_model" min="0" (change)="hypothetical()" class="form-control" />
+                                            <span class="input-group-addon" style="font-weight:bold">MCF</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="min-height:50px">
+                                    <div class="col-md-6">
+                                        <b>Estimated Total Gas Production:</b>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <input type="number" [(ngModel)]="Estimated_Gas_ultimate_recovery_model" min="0" (change)="hypothetical()" class="form-control"
+                                            />
+                                            <span class="input-group-addon" style="font-weight:bold">MCF</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <br>
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        <!-- 
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="row" style="height: 180px">
+                                    <div class="col-md-12" style="text-align: center">
+                                        <input type='file' style="display: none" #refFile (change)="readUrl($event)">
+                                        <img style="border: 2px solid black" [src]="url" height="175px" width="150px">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12" style="text-align: center">
+                                        <button type="submit" (click)="refFile.click()" class="btn btn-block">Select Image</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col md-1"></div>
+                            <div class="col-md-9">
+                                <div class="row">
+                                    <div class="col-md-12" style="text-align: justify">
+                                        This interactive calculator allows you to input values in order to create a unique investment scenario and performance expectation
+                                        under the terms of this partnership.
+                                    </div>
+                                </div>
+
+                                <div class="row" style="padding-top: 15px">
+                                    <div class="col-md-5">
+                                        <div class="row">
+                                            <div class="col-md-12" *ngIf="!showPartnerName">
+                                                <b>
+                                                    {{partner_name}} &nbsp;&nbsp;
+                                                </b>
+                                                <span class="glyphicon glyphicon-edit" style="cursor: pointer" (click)="showPartnerName = !showPartnerName"></span>
+                                            </div>
+
+                                            <div *ngIf="showPartnerName">
+                                                <div class="col-md-8">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            <i class="glyphicon glyphicon-user"></i>
+                                                        </span>
+                                                        <input type="text" [(ngModel)]="temp_partner_name" placeholder="Partnership Name" class="form-control" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <button class="btn btn-success" (click)="partner_name = temp_partner_name ? temp_partner_name : partner_name; showPartnerName = false">
+                                                        <i class="glyphicon glyphicon-ok"></i>
+                                                    </button>
+                                                    <button type="submit" class="btn btn-danger" (click)="showPartnerName=false; temp_partner_name = ''">
+                                                        <i class="glyphicon glyphicon-remove"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row" style="padding-top: 10px">
+                                            <div class="col-md-12" *ngIf="!showAddress">
+                                                {{address}} &nbsp;&nbsp;
+                                                <span class="glyphicon glyphicon-edit" style="cursor: pointer" (click)="showAddress = !showAddress"></span>
+                                            </div>
+
+                                            <div *ngIf="showAddress">
+                                                <div class="col-md-8">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            <i class="glyphicon glyphicon-map-marker"></i>
+                                                        </span>
+                                                        <input type="text" [(ngModel)]="temp_address" placeholder="Location" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <button class="btn btn-success" (click)="address = temp_address ? temp_address : address; showAddress = false">
+                                                        <i class="glyphicon glyphicon-ok"></i>
+                                                    </button>
+                                                    <button type="submit" class="btn btn-danger" (click)="showAddress=false; temp_address = ''">
+                                                        <i class="glyphicon glyphicon-remove"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row" style="padding-top: 10px">
+                                            <div class="col-md-12" *ngIf="!showMeasured">
+                                                {{measured}} &nbsp;&nbsp;
+                                                <span class="glyphicon glyphicon-edit" style="cursor: pointer" (click)="showMeasured = !showMeasured"></span>
+                                            </div>
+
+                                            <div *ngIf="showMeasured">
+                                                <div class="col-md-8">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            <i class="glyphicon glyphicon-text-color"></i>
+                                                        </span>
+                                                        <input type="text" [(ngModel)]="temp_measured" placeholder="Measured Depth Details" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <button class="btn btn-success" (click)="measured = temp_measured ? temp_measured : measured; showMeasured = false">
+                                                        <i class="glyphicon glyphicon-ok"></i>
+                                                    </button>
+                                                    <button type="submit" class="btn btn-danger" (click)="showMeasured=false; temp_measured = ''">
+                                                        <i class="glyphicon glyphicon-remove"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row" style="padding-top: 10px">
+                                            <div class="col-md-12" *ngIf="!showDescription1">
+                                                {{description1}} &nbsp;&nbsp;
+                                                <span class="glyphicon glyphicon-edit" style="cursor: pointer" (click)="showDescription1 = !showDescription1"></span>
+                                            </div>
+
+                                            <div *ngIf="showDescription1">
+                                                <div class="col-md-8">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            <i class="glyphicon glyphicon-text-color"></i>
+                                                        </span>
+                                                        <input type="text" [(ngModel)]="temp_description1" placeholder="Description" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <button class="btn btn-success" (click)="description1 = temp_description1 ? temp_description1 : description1; showDescription1 = false">
+                                                        <i class="glyphicon glyphicon-ok"></i>
+                                                    </button>
+                                                    <button type="submit" class="btn btn-danger" (click)="showDescription1=false; temp_description1 = ''">
+                                                        <i class="glyphicon glyphicon-remove"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row" style="padding-top: 10px">
+                                            <div class="col-md-12" *ngIf="!showDescription2">
+                                                {{description2}} &nbsp;&nbsp;
+                                                <span class="glyphicon glyphicon-edit" style="cursor: pointer" (click)="showDescription2 = !showDescription2"></span>
+                                            </div>
+                                            <div *ngIf="showDescription2">
+                                                <div class="col-md-8">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            <i class="glyphicon glyphicon-text-color"></i>
+                                                        </span>
+                                                        <input type="text" [(ngModel)]="temp_description2" placeholder="Description" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <button class="btn btn-success" (click)="description2 = temp_description2 ? temp_description2 : description2; showDescription2 = false">
+                                                        <i class="glyphicon glyphicon-ok"></i>
+                                                    </button>
+                                                    <button type="submit" class="btn btn-danger" (click)="showDescription2=false; temp_description2 = ''">
+                                                        <i class="glyphicon glyphicon-remove"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-7">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                Total Raise:
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="input-group">
+                                                    <input type="number" [(ngModel)]="total_raise" min="0" (change)="hypothetical()" min="0" class="form-control" />
+                                                    <span class="input-group-addon" style="font-weight:bold">&nbsp;$&nbsp;&nbsp;</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row" style="padding-top: 10px">
+                                            <div class="col-md-3">
+                                                Terms:
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="input-group">
+                                                    <input type="number" [(ngModel)]="nri_percentage" min="0" (change)="hypothetical()" min="0" class="form-control" />
+                                                    <span class="input-group-addon" style="font-weight:bold">%</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5">
+                                                NRI (Net Revenue Interest)
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr style="border-top: 1px solid #CDCDCD">
+
+                        <div class="row" style="margin-top:25px;">
+                            <div class="col-md-6" style="border-right: 1px solid #CDCDCD">
+                                <div class="row" style="min-height:45px">
+                                    <div class="col-md-5">
+                                        <b>Est. Daily Oil Production:</b>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <input type="number" [(ngModel)]="Estimated_oil_model" min="0" (change)="hypothetical()" class="form-control" />
+                                            <span class="input-group-addon" style="font-weight:bold">BO &nbsp;&nbsp;</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1"></div>
+                                </div>
+
+                                <div class="row" style="min-height:45px">
+                                    <div class="col-md-5">
+                                        <b>Est. Daily Gas Production:</b>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <input type="number" [(ngModel)]="Estimated_gas_model" min="0" (change)="hypothetical()" class="form-control" />
+                                            <span class="input-group-addon" style="font-weight:bold">MCF</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1"></div>
+                                </div>
+
+                                <div class="row" style="min-height:45px">
+                                    <div class="col-md-5">
+                                        <b>Your Est. Oil Price:</b>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <input type="number" [(ngModel)]="Estimated_oil_price_model" min="0" (change)="hypothetical()" class="form-control" />
+                                            <span class="input-group-addon" style="font-weight:bold; font-size: 16px">&nbsp;&nbsp;$&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1"></div>
+                                </div>
+
+                                <div class="row" style="min-height:45px">
+                                    <div class="col-md-5">
+                                        <b>Your Est. Gas Price:</b>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <input type="number" [(ngModel)]="Estimated_gas_price_model" min="0" (change)="hypothetical()" class="form-control" />
+                                            <span class="input-group-addon" style="font-weight:bold; font-size: 16px">&nbsp;&nbsp;$&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1"></div>
+                                </div>
+
+                                <div class="row" style="min-height:45px">
+                                    <div class="col-md-5">
+                                        <b>Operating Expenses Ratio:</b>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <input type="number" min="0" max="100" [(ngModel)]="Operating_Expenses_Ratio" (change)="hypothetical()" class="form-control"
+                                            />
+                                            <span class="input-group-addon" style="font-weight:bold; font-size: 16px">&nbsp;% &nbsp;&nbsp;</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1"></div>
+                                </div>
+
+                                <div class="row" style="min-height:45px">
+                                    <div class="col-md-5">
+                                        <b>Oil-Est. Ultimate Recovery:</b>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <input type="number" [(ngModel)]="Estimated_Oil_ultimate_recovery_model" min="0" (change)="hypothetical()" class="form-control"
+                                            />
+                                            <span class="input-group-addon" style="font-weight:bold">BO &nbsp;&nbsp;</span>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-1"></div>
+                                </div>
+
+                                <div class="row" style="min-height:45px">
+                                    <div class="col-md-5">
+                                        <b>Gas-Est. Ultimate Recovery:</b>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <input type="number" [(ngModel)]="Estimated_Gas_ultimate_recovery_model" min="0" (change)="hypothetical()" class="form-control"
+                                            />
+                                            <span class="input-group-addon" style="font-weight:bold">MCF</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="row" style="min-height:45px">
+                                    <div class="col-md-6">
+                                        <b>Hypothetical Investment Amount:</b>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <input type="number" [(ngModel)]="Hypothetical_investment_model" min="0" (change)="hypothetical()" min="0" class="form-control"
+                                            />
+                                            <span class="input-group-addon" style="font-weight:bold">&nbsp;$&nbsp;&nbsp;</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="min-height:45px">
+                                    <div class="col-md-6">Net Revenue Interest (NRI):</div>
+                                    <div class="col-md-6">{{ Net_Revenue_model | percent }}</div>
+                                </div>
+
+                                <div class="row" style="min-height:45px">
+                                    <div class="col-md-6">Est. Monthly Income:</div>
+                                    <div class="col-md-6">{{ Potential_Monthly_model | currency:'USD' : true : '2.2-2' }}
+                                    </div>
+                                </div>
+
+
+                                <div class="row" style="min-height:45px">
+                                    <div class="col-md-6">Months to payout:</div>
+                                    <div class="col-md-6">{{ Months_to_model | number : '1.1-1' }}</div>
+                                </div>
+
+                                <div class="row" style="min-height:45px">
+                                    <div class="col-md-6">Est. Months of Cash Flow:
+                                        <i class="glyphicon glyphicon-question-sign" title="Total Potential Months of Cash Flow = (Total Potential Cash Flow/ Potential Monthly Income)"></i>
+                                    </div>
+                                    <div class="col-md-6">{{ Months_to_cash_flow | number : '1.1-1' }}</div>
+                                </div>
+
+                                <div class="row" style="min-height:45px">
+                                    <div class="col-md-6">Est. Net Cash Flow:</div>
+                                    <div class="col-md-6">{{ Total_Potential_model | currency:'USD' : true : '1.2-2' }} &nbsp;&nbsp;
+                                        <b>ROI &nbsp;&nbsp;
+                                            <span class="greenColor">{{ roi_percent ? roi_percent : "0%" }}</span>
+                                        </b>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+ -->
+                    </div>
+                </accordion-group>
+            </accordion>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
