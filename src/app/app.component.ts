@@ -63,6 +63,30 @@ export class AppComponent implements OnInit {
   public lineData: Array<any> = [];
   public lineChartLabels: Array<any> = [];
 
+  public barChartOptions: any = {
+    legend: { position: 'bottom' }
+  }
+
+  public lineChartColors:Array<any> = [
+    { // grey
+      backgroundColor: 'rgba(148,159,177,0.2)',
+      borderColor: 'rgba(148,159,177,1)',
+      pointBackgroundColor: 'rgba(148,159,177,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+    },
+    { // dark grey
+      backgroundColor: 'rgba(77,83,96,0.2)',
+      borderColor: 'rgba(77,83,96,1)',
+      pointBackgroundColor: 'rgba(77,83,96,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(77,83,96,1)'
+    },
+  ];
+
+
   onChange(item: any) {
     console.log(item)
   }
@@ -126,7 +150,8 @@ export class AppComponent implements OnInit {
   // Calculate Hypothetical Price, Production, and Cash Flow Scenarios
   hypothetical() {
     this.lineData = [];
-    this.lineChartLabels = [];
+    //this.lineChartLabels = [];
+    this.lineChartLabels.length = 0;
     let temp1 = 0, temp2 = 0;
 
     // Unit Equivalent Model Calculation
@@ -188,24 +213,25 @@ export class AppComponent implements OnInit {
       data.push(parseFloat(this.Total_Potential_model.toFixed(2)));
     else data.push(0);
 
+    this.lineData.push({ label: 'Estimated Total Months of Cash Flow', data: data })
+    //this.lineData = data;
 
-    this.lineData = data;
-
-    var label = [];
-    label.push("0");
+    this.lineChartLabels.push('0');
 
     if (isFinite(this.Months_to_model) && !isNaN(this.Months_to_model))
-      label.push(this.Months_to_model.toFixed(1));
+      this.lineChartLabels.push(this.Months_to_model.toFixed(1) + '');
     else
-      label.push("0");
+      this.lineChartLabels.push('0');
 
 
     if (isFinite(this.Months_to_cash_flow) && !isNaN(this.Months_to_cash_flow))
-      label.push(this.Months_to_cash_flow.toFixed(1));
+      this.lineChartLabels.push(this.Months_to_cash_flow.toFixed(1) + '');
     else
-      label.push("0");
+      this.lineChartLabels.push('0');
 
-    this.lineChartLabels = label;
+    //this.lineChartLabels = label;
+
+    //this.lineChartLabels.push()
 
 
     console.log(this.lineData);

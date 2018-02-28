@@ -26,7 +26,7 @@
                         <br>
 
                         <div class="row" *ngIf="!mobileView">
-                            <div class="col-md-5" style="padding: 20px 0px 10px 25px; border: 1px solid black">
+                            <div class="col-md-6" style="padding: 20px 0px 10px 25px; border: 1px solid black">
 
                                 <div class="row">
                                     <div class="col-md-12" style="text-align:center; padding-bottom: 30px;">
@@ -85,21 +85,77 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col-md-6">
-                                <canvas baseChart id="myChart" [data]="lineData" [labels]="lineChartLabels" [chartType]="'line'" height="165px"></canvas>
-                            </div>
-                            <div class="col-md-1" style="margin-left: -15px; margin-top: 75px;">
-                                <div class="round round-lg hollow ">{{ roi_percent ? roi_percent : "0%" }}</div>
-                                <br>
-                                <h2 style="padding-left:15px; text-align: center; font-weight:bold; color: rgba(8, 173, 63, 0.75)">ROI</h2>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div id="arrow" class="col-md-5" style="text-align: center">
+                                                Estimated Monthly Income
+                                                <br>
+                                                <span style="font-weight: bold">{{ Potential_Monthly_model | currency:'USD' : true : '1.2-2' }}</span>
+                                            </div>
+                                            <div class="col-md-6" style="text-align: center">
+                                                Estimated Total Net Cash Flow
+                                                <br>
+                                                <span style="color: green; font-weight: bold">{{ Total_Potential_model | currency:'USD' : true : '1.2-2' }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <canvas baseChart id="myChart" [options]="barChartOptions" [colors]="lineChartColors" [datasets]="lineData" [labels]="lineChartLabels"
+                                            [chartType]="'line'" height="200px"></canvas>
+                                    </div>
+                                    <div class="col-md-2" style="margin-left: -15px; margin-top: 75px;">
+                                        <div class="round round-lg hollow ">{{ roi_percent ? roi_percent : "0%" }}</div>
+                                        <br>
+                                        <h2 style="padding-left:15px; text-align: center; font-weight:bold; color: rgba(8, 173, 63, 0.75)">ROI</h2>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
                         <div class="row" *ngIf="mobileView">
-                            <div class="col-md-6">
-                                Sample Text
+
+                            <div class="col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="row">
+                                            <div class="col-xs-2"></div>
+                                            <div id="arrow" class="col-xs-5" style="text-align: center">
+                                                Estimated Monthly Income
+                                                <br>
+                                                <span style="font-weight: bold">{{ Potential_Monthly_model | currency:'USD' : true : '1.2-2' }}</span>
+                                            </div>
+                                            <div class="col-xs-5" style="text-align: center">
+                                                Estimated Total Net Cash Flow
+                                                <br>
+                                                <span style="color: green; font-weight: bold">{{ Total_Potential_model | currency:'USD' : true : '1.2-2' }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <canvas baseChart id="myChart" [options]="barChartOptions" [colors]="lineChartColors" [datasets]="lineData" [labels]="lineChartLabels"
+                                            [chartType]="'line'" height="250px"></canvas>
+                                    </div>
+                                    <div class="col-xs-2" style="margin-top: 20px;">
+                                        <div style="margin-left: -15px; text-align: center" class="round round-sm holl">{{ roi_percent ? roi_percent : "0%" }}</div>
+                                        <br>
+                                        <h3 style="margin-left: -10px; font-weight:bold; color: rgba(8, 173, 63, 0.75)">ROI</h3>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-6" style="padding:20px 10px 20px 10px;  border: 1px solid black">
+
+
+
+
+
+                            <div class="col-xs-12" style="margin-top: 25px; padding:20px 10px 20px 10px;  border: 1px solid black">
 
                                 <div class="row">
                                     <div class="col-md-12" style="text-align:center; padding-bottom: 30px;">
@@ -185,10 +241,10 @@
 
                             <div class="col-md-5">
                                 <div class="row" style="min-height:45px">
-                                    <div class="col-md-6">
+                                    <div class="col-md-7">
                                         <b>Estimated Oil Price:</b>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-5">
                                         <div class="input-group">
                                             <input type="number" [(ngModel)]="Estimated_oil_price_model" min="0" (change)="hypothetical()" class="form-control" />
                                             <span class="input-group-addon" style="font-weight:bold; font-size: 16px">&nbsp;$&nbsp;&nbsp;</span>
@@ -204,10 +260,10 @@
                                 </div>
 
                                 <div class="row" style="min-height:50px">
-                                    <div class="col-md-6">
+                                    <div class="col-md-7">
                                         <b>Estimated Daily Oil Production:</b>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-5">
                                         <div class="input-group">
                                             <input type="number" [(ngModel)]="Estimated_oil_model" min="0" (change)="hypothetical()" class="form-control" />
                                             <span class="input-group-addon" style="font-weight:bold">BO</span>
@@ -216,10 +272,10 @@
                                 </div>
 
                                 <div class="row" style="min-height:50px">
-                                    <div class="col-md-6">
+                                    <div class="col-md-7">
                                         <b>Estimated Total Oil Production:</b>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-5">
                                         <div class="input-group">
                                             <input type="number" [(ngModel)]="Estimated_Oil_ultimate_recovery_model" min="0" (change)="hypothetical()" class="form-control"
                                             />
@@ -245,10 +301,10 @@
 
                             <div class="col-md-5">
                                 <div class="row" style="min-height:45px">
-                                    <div class="col-md-6">
+                                    <div class="col-md-7">
                                         <b>Estimated Gas Price:</b>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-5">
                                         <div class="input-group">
                                             <input type="number" [(ngModel)]="Estimated_gas_price_model" min="0" (change)="hypothetical()" class="form-control" />
                                             <span class="input-group-addon" style="font-weight:bold; font-size: 16px">&nbsp;&nbsp;$&nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -263,10 +319,10 @@
                                 </div>
 
                                 <div class="row" style="min-height:50px">
-                                    <div class="col-md-6">
+                                    <div class="col-md-7">
                                         <b>Estimated Daily Gas Production:</b>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-5">
                                         <div class="input-group">
                                             <input type="number" [(ngModel)]="Estimated_gas_model" min="0" (change)="hypothetical()" class="form-control" />
                                             <span class="input-group-addon" style="font-weight:bold">MCF</span>
@@ -275,10 +331,10 @@
                                 </div>
 
                                 <div class="row" style="min-height:50px">
-                                    <div class="col-md-6">
+                                    <div class="col-md-7">
                                         <b>Estimated Total Gas Production:</b>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-5">
                                         <div class="input-group">
                                             <input type="number" [(ngModel)]="Estimated_Gas_ultimate_recovery_model" min="0" (change)="hypothetical()" class="form-control"
                                             />

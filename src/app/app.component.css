@@ -48,6 +48,30 @@ agm-map {
     .row {
         font-size: 12px;
     }
+    .round.round-sm {
+        height: 60px;
+        width: 60px;
+        line-height: 60px;
+        -moz-border-radius: 30px;
+        border-radius: 30px;
+        font-size: 1.7em;
+        font-weight: bold;
+    }
+    
+    .round.holl {
+        display: inline-block;
+        height: 60px;
+        width: 60px;
+        line-height: 60px;
+        -moz-border-radius: 30px;
+        border-radius: 30px;
+        background-color: #FFF;
+        color: rgba(8, 173, 63, 0.75);
+        text-align: center;
+        -webkit-box-shadow: 0px 0px 0px 5px rgba(8, 173, 63, 0.75);
+        -moz-box-shadow: 0px 0px 0px 5px rgba(8, 173, 63, 0.75);
+        box-shadow: 0px 0px 0px 5px rgba(8, 173, 63, 0.75);
+    }
 }
 
 .col-md-12 {
@@ -93,28 +117,28 @@ i:active:after {
 }
 
 .round.round-lg {
-    height: 90px;
-    width: 90px;
-    line-height: 90px;
-    -moz-border-radius: 45px;
-    border-radius: 45px;
-    font-size: 2.0em;
+    height: 80px;
+    width: 80px;
+    line-height: 80px;
+    -moz-border-radius: 40px;
+    border-radius: 40px;
+    font-size: 1.8em;
     font-weight: bold;
 }
 
 .round.hollow {
     display: inline-block;
-    height: 90px;
-    width: 90px;
-    line-height: 90px;
-    -moz-border-radius: 45px;
-    border-radius: 45px;
+    height: 80px;
+    width: 80px;
+    line-height: 80px;
+    -moz-border-radius: 40px;
+    border-radius: 40px;
     background-color: #FFF;
     color: rgba(8, 173, 63, 0.75);
     text-align: center;
-    -webkit-box-shadow: 0px 0px 0px 7px rgba(8, 173, 63, 0.75);
-    -moz-box-shadow: 0px 0px 0px 7px rgba(8, 173, 63, 0.75);
-    box-shadow: 0px 0px 0px 7px rgba(8, 173, 63, 0.75);
+    -webkit-box-shadow: 0px 0px 0px 5px rgba(8, 173, 63, 0.75);
+    -moz-box-shadow: 0px 0px 0px 5px rgba(8, 173, 63, 0.75);
+    box-shadow: 0px 0px 0px 5px rgba(8, 173, 63, 0.75);
 }
 
 #icon1 {
@@ -161,4 +185,30 @@ accordion-heading {
 
 .table>tbody>tr>th{
     border-top: none;
+}
+
+
+
+
+
+
+#arrow{
+    position:relative;
+    background:lightgrey;
+    text-align:center;
+}
+#arrow:after, #arrow:before{
+    content:"";
+    position:absolute;
+    width:20px;
+    height:50%;
+    left:100%;
+}
+#arrow:after{
+    bottom:0;
+    background: linear-gradient(to right bottom, lightgrey 50%, transparent 50%);
+}
+#arrow:before{
+      top:0;
+    background: linear-gradient(to right top, lightgrey 50%, transparent 50%);
 }
