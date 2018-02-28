@@ -187,8 +187,21 @@ accordion-heading {
     border-top: none;
 }
 
+.gas-price {
+    position: relative;
+    height: 30px;
+    margin: 0px;
+    overflow: hidden;
+    width: 175px
+}
 
-
+.oil-price {
+    position: relative;
+    height: 30px;
+    margin: 0px;
+    overflow: hidden;
+    width: 175px
+}
 
 
 
