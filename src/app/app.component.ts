@@ -60,6 +60,9 @@ export class AppComponent implements OnInit {
     { stateName: "Washington", taxValue: 11.25 },
   ];
 
+  public lineData: Array<any> = [];
+  public lineChartLabels: Array<any> = [];
+
   onChange(item: any) {
     console.log(item)
   }
@@ -122,6 +125,8 @@ export class AppComponent implements OnInit {
 
   // Calculate Hypothetical Price, Production, and Cash Flow Scenarios
   hypothetical() {
+    this.lineData = [];
+    this.lineChartLabels = [];
     let temp1 = 0, temp2 = 0;
 
     // Unit Equivalent Model Calculation
@@ -171,15 +176,47 @@ export class AppComponent implements OnInit {
 
 
     var data = [];
-    data.push(this.Hypothetical_investment_model ? this.Hypothetical_investment_model : 0);
-    data.push(this.Total_Potential_model ? this.Total_Potential_model : 0);
 
-/*     var ctx = document.getElementById("myChart");
-    var myLineChart = new Chart(ctx, {
-      type: 'line',
-      data: data
-      //options: options
-    }); */
+    data.push(0);
+
+    if (isFinite(this.Hypothetical_investment_model) && !isNaN(this.Hypothetical_investment_model))
+      data.push(parseFloat(this.Hypothetical_investment_model.toFixed(2)));
+    else
+      data.push(0);
+
+    if (isFinite(this.Total_Potential_model) && !isNaN(this.Total_Potential_model))
+      data.push(parseFloat(this.Total_Potential_model.toFixed(2)));
+    else data.push(0);
+
+
+    this.lineData = data;
+
+    var label = [];
+    label.push("0");
+
+    if (isFinite(this.Months_to_model) && !isNaN(this.Months_to_model))
+      label.push(this.Months_to_model.toFixed(1));
+    else
+      label.push("0");
+
+
+    if (isFinite(this.Months_to_cash_flow) && !isNaN(this.Months_to_cash_flow))
+      label.push(this.Months_to_cash_flow.toFixed(1));
+    else
+      label.push("0");
+
+    this.lineChartLabels = label;
+
+
+    console.log(this.lineData);
+    console.log(this.lineChartLabels);
+
+    /*     var ctx = document.getElementById("myChart");
+        var myLineChart = new Chart(ctx, {
+          type: 'line',
+          data: data
+          //options: options
+        }); */
   }
 
   // Converting the Decimal to Fraction Part
