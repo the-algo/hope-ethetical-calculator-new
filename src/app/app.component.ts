@@ -60,30 +60,30 @@ export class AppComponent implements OnInit {
     { stateName: "Washington", taxValue: 11.25 },
   ];
 
-  public lineData: Array<any> = [];
+  public lineData: Array<any> = [{ label: '', data: [] }];
   public lineChartLabels: Array<any> = [];
 
   public barChartOptions: any = {
     legend: { position: 'bottom' }
   }
 
-  public lineChartColors:Array<any> = [
-    { // grey
-      backgroundColor: 'rgba(148,159,177,0.2)',
-      borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
+  public lineChartColors: Array<any> = [
+    {
+      backgroundColor: 'rgba(146,206,80,1.0)',
+      borderColor: 'rgba(146,206,80,1.0)',
+      pointBackgroundColor: 'rgba(146,206,80,1.0)',
       pointBorderColor: '#fff',
       pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+      pointHoverBorderColor: 'rgba(146,206,80,1.0)'
     },
-    { // dark grey
-      backgroundColor: 'rgba(77,83,96,0.2)',
-      borderColor: 'rgba(77,83,96,1)',
-      pointBackgroundColor: 'rgba(77,83,96,1)',
+    {
+      backgroundColor: 'rgba(51,129,199,1.0)',
+      borderColor: 'rgba(51,129,199,1.0)',
+      pointBackgroundColor: 'rgba(51,129,199,1.0)',
       pointBorderColor: '#fff',
       pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(77,83,96,1)'
-    },
+      pointHoverBorderColor: 'rgba(51,129,199,1.0)'
+    }
   ];
 
 
@@ -200,29 +200,33 @@ export class AppComponent implements OnInit {
       this.roi_percent = "0%";
 
 
-    var data = [];
-
-    data.push(0);
+    var data1 = [];
+    data1.push(0);
 
     if (isFinite(this.Hypothetical_investment_model) && !isNaN(this.Hypothetical_investment_model))
-      data.push(parseFloat(this.Hypothetical_investment_model.toFixed(2)));
+      data1.push(parseFloat(this.Hypothetical_investment_model.toFixed(2)));
     else
-      data.push(0);
+      data1.push(0);
 
+    this.lineData.push({ label: 'Investment Amount', data: data1 });
+
+    var data2 = [];
+    data2.push(0);
     if (isFinite(this.Total_Potential_model) && !isNaN(this.Total_Potential_model))
-      data.push(parseFloat(this.Total_Potential_model.toFixed(2)));
-    else data.push(0);
+      data2.push(parseFloat(this.Total_Potential_model.toFixed(2)));
+    else
+      data2.push(0);
 
-    this.lineData.push({ label: 'Estimated Total Months of Cash Flow', data: data })
+    this.lineData.push({ label: 'Estimated Total Months of Cash Flow', data: data2 });
     //this.lineData = data;
 
     this.lineChartLabels.push('0');
-
+/* 
     if (isFinite(this.Months_to_model) && !isNaN(this.Months_to_model))
       this.lineChartLabels.push(this.Months_to_model.toFixed(1) + '');
     else
       this.lineChartLabels.push('0');
-
+ */
 
     if (isFinite(this.Months_to_cash_flow) && !isNaN(this.Months_to_cash_flow))
       this.lineChartLabels.push(this.Months_to_cash_flow.toFixed(1) + '');
