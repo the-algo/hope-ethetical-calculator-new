@@ -247,7 +247,7 @@ export class AppComponent implements OnInit {
     else
       data1.push(0);
 
-    this.lineData.push({ label: 'Investment Amount', data: data1 });
+    this.lineData.push({ label: 'Investment Amount ($)', data: data1 });
 
     var data2 = [];
     data2.push(0);
@@ -256,7 +256,7 @@ export class AppComponent implements OnInit {
     else
       data2.push(0);
 
-    this.lineData.push({ label: 'Estimated Total Cash Flow', data: data2 });
+    this.lineData.push({ label: 'Estimated Total Cash Flow ($)', data: data2 });
     //this.lineData = data;
 
     this.lineChartLabels.push('0');
