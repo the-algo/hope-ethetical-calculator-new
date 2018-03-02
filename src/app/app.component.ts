@@ -204,7 +204,7 @@ export class AppComponent implements OnInit {
     data1.push(0);
 
     if (isFinite(this.Hypothetical_investment_model) && !isNaN(this.Hypothetical_investment_model))
-      data1.push(parseFloat(this.Hypothetical_investment_model.toFixed(2)));
+      data1.push(parseFloat(this.Hypothetical_investment_model.toFixed(2)), null);
     else
       data1.push(0);
 
@@ -213,20 +213,20 @@ export class AppComponent implements OnInit {
     var data2 = [];
     data2.push(0);
     if (isFinite(this.Total_Potential_model) && !isNaN(this.Total_Potential_model))
-      data2.push(parseFloat(this.Total_Potential_model.toFixed(2)));
+      data2.push(parseFloat(this.Hypothetical_investment_model.toFixed(2)), parseFloat(this.Total_Potential_model.toFixed(2)));
     else
       data2.push(0);
 
-    this.lineData.push({ label: 'Estimated Total Months of Cash Flow', data: data2 });
+    this.lineData.push({ label: 'Estimated Total Cash Flow', data: data2 });
     //this.lineData = data;
 
     this.lineChartLabels.push('0');
-/* 
+
     if (isFinite(this.Months_to_model) && !isNaN(this.Months_to_model))
       this.lineChartLabels.push(this.Months_to_model.toFixed(1) + '');
     else
       this.lineChartLabels.push('0');
- */
+
 
     if (isFinite(this.Months_to_cash_flow) && !isNaN(this.Months_to_cash_flow))
       this.lineChartLabels.push(this.Months_to_cash_flow.toFixed(1) + '');
