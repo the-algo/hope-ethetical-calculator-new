@@ -8,8 +8,8 @@ import { Chart } from 'chart.js';
 })
 
 export class AppComponent implements OnInit {
-  public tax = 0.046;
-  public tax_gas = 0.075;
+  public tax = 0;
+  public tax_gas = 0;
   public partner_name = "Partnership Name";
   public temp_partner_name = "";
 
@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
   public showDescription1: boolean = false;
   public showDescription2: boolean = false;
 
-  public nri_percentage: number = 0;
+  public nri_percentage: number = 11.25;
   public total_raise: number = 0;
 
   public url: string = "assets/no-preview.png";
@@ -41,23 +41,39 @@ export class AppComponent implements OnInit {
 
   public options = [
     { stateName: "-- Select State --", taxValue: null },
-    { stateName: "Alaska", taxValue: 11.25 },
-    { stateName: "California", taxValue: 11.25 },
-    { stateName: "Colorado", taxValue: 11.25 },
-    { stateName: "Florida", taxValue: 11.25 },
-    { stateName: "Georgia", taxValue: 11.25 },
-    { stateName: "Hawaii", taxValue: 11.25 },
-    { stateName: "Indiana", taxValue: 11.25 },
-    { stateName: "Mississippi", taxValue: 11.25 },
-    { stateName: "New York", taxValue: 11.25 },
-    { stateName: "North Carolina", taxValue: 11.25 },
-    { stateName: "Ohio", taxValue: 11.25 },
-    { stateName: "South Carolina", taxValue: 11.25 },
-    { stateName: "Texas", taxValue: 11.25 },
-    { stateName: "Utah", taxValue: 11.25 },
-    { stateName: "Vermont", taxValue: 11.25 },
-    { stateName: "Virginia", taxValue: 11.25 },
-    { stateName: "Washington", taxValue: 11.25 },
+    { stateName: "Alabama", taxValue: [4, 4] },
+    { stateName: "Arkansas", taxValue: [5, 5] },
+    { stateName: "Alaska", taxValue: [15, 10] },
+    { stateName: "Arizona", taxValue: [6.60, 6.60] },
+    { stateName: "California", taxValue: [0, 0] },
+    { stateName: "Colorado", taxValue: [5, 5] },
+    { stateName: "Florida", taxValue: [9, 9] },
+    { stateName: "Idaho", taxValue: [2, 2] },
+    { stateName: "Illinois", taxValue: [0, 0] },
+    { stateName: "Indiana", taxValue: [1, 0.24] },
+    { stateName: "Kansas", taxValue: [8, 8] },
+    { stateName: "Kentucky", taxValue: [4.5, 4.5] },
+    { stateName: "Louisiana", taxValue: [12.5, 0.164] },
+    { stateName: "Maryland", taxValue: [7, 7] },
+    { stateName: "Michigan", taxValue: [6.6, 5] },
+    { stateName: "Minnesota", taxValue: [2, 2] },
+    { stateName: "Mississippi", taxValue: [6, 6] },
+    { stateName: "Montana", taxValue: [1, 1] },
+    { stateName: "Nebraska", taxValue: [3, 3] },
+    { stateName: "New Mexico", taxValue: [3.75, 3.75] },
+    { stateName: "Nevada", taxValue: [5, 5] },
+    { stateName: "North Dakota", taxValue: [5, 0.04] },
+    { stateName: "Ohio", taxValue: [0.10, 0.025] },
+    { stateName: "Oklahoma", taxValue: [7, 7] },
+    { stateName: "Oregon", taxValue: [6, 6] },
+    { stateName: "South Dakota", taxValue: [4.5, 4.5] },
+    { stateName: "Texas", taxValue: [4.6, 7.5] },
+    { stateName: "Tennessee", taxValue: [3, 3] },
+    { stateName: "Utah", taxValue: [5, 5] },
+    { stateName: "Virginia", taxValue: [5, 5] },
+    { stateName: "West Virginia", taxValue: [10, 10] },
+    { stateName: "Wisconsin", taxValue: [7, 7] },
+    { stateName: "Wyoming", taxValue: [6, 6] },
   ];
 
   public lineData: Array<any> = [{ label: '', data: [] }];
@@ -86,9 +102,35 @@ export class AppComponent implements OnInit {
     }
   ];
 
-
   onChange(item: any) {
-    console.log(item)
+    this.allTax = [];
+    this.allTax = item.split(",");
+    this.tempOil = parseFloat(this.allTax[0]);
+    this.tempGas = parseFloat(this.allTax[1]);
+
+    console.log(item);
+
+    this.calculateTax(this.tempOil, this.tempGas);
+    this.hypothetical();
+  }
+
+  calculateTax(oil, gas) {
+    if (oil > 0 && oil < 0.5) {
+      this.tax = ((oil / 100) * this.Estimated_Oil_ultimate_recovery_model) / 100;
+      console.log(this.tax);
+    }
+
+    if (gas > 0 && gas < 0.5) {
+      this.tax_gas = ((oil / 100) * this.Estimated_Oil_ultimate_recovery_model) / 100;
+      console.log(this.tax_gas);
+    }
+
+    if (oil > 0 && gas > 0) {
+      this.tax = oil / 100;
+      this.tax_gas = gas / 100;
+      console.log(this.tax);
+      console.log(this.tax_gas);
+    }
   }
 
   // Dependency Injection
@@ -106,18 +148,6 @@ export class AppComponent implements OnInit {
     }
   }
 
-  readUrl(event: any) {
-    if (event.target.files && event.target.files[0]) {
-      var reader = new FileReader();
-
-      reader.onload = (event: any) => {
-        this.url = event.target.result;
-        this.hidden = false;
-      }
-
-      reader.readAsDataURL(event.target.files[0]);
-    }
-  }
 
   /*-------------------------------------------------------------------------------------------------------------------*/
 
@@ -147,8 +177,17 @@ export class AppComponent implements OnInit {
 
   public unit: string;
 
+  public allTax = [];
+  public tempOil = 0;
+  public tempGas = 0;
+
+
   // Calculate Hypothetical Price, Production, and Cash Flow Scenarios
   hypothetical() {
+
+    if (this.tempOil >= 0 && this.tempGas >= 0)
+      this.calculateTax(this.tempOil, this.tempGas);
+
     this.lineData = [];
     //this.lineChartLabels = [];
     this.lineChartLabels.length = 0;
@@ -159,24 +198,24 @@ export class AppComponent implements OnInit {
     this.findFraction(this.unit_equivalent_model);
 
     // NRI Percentage Calculation
-    this.Net_Revenue_model = this.c * this.unit_equivalent_model;
-    this.Net_Revenue_model = parseFloat(this.Net_Revenue_model.toPrecision(4));
+    //this.Net_Revenue_model = this.c * this.unit_equivalent_model;
+    //this.Net_Revenue_model = parseFloat(this.Net_Revenue_model.toPrecision(4));
 
     // Estimated Monthly Income Calculation
     temp1 = this.Estimated_oil_model * 30 * this.Estimated_oil_price_model;
     temp1 = temp1 - (this.tax * temp1);
     temp2 = this.Estimated_gas_model * 30 * this.Estimated_gas_price_model;
-    temp2 = (temp2 - (this.tax_gas * temp2)) * this.Net_Revenue_model;
+    temp2 = (temp2 - (this.tax_gas * temp2)) * (this.nri_percentage / 100);
     temp1 = temp1 + temp2;
     temp1 = temp1 - ((this.Operating_Expenses_Ratio / 100) * temp1);
-    this.Potential_Monthly_model = temp1 * this.Net_Revenue_model;
+    this.Potential_Monthly_model = temp1 * (this.nri_percentage / 100);
     this.Potential_Monthly_model = parseFloat(this.Potential_Monthly_model.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0]);
 
     temp1 = this.Estimated_Oil_ultimate_recovery_model * this.Estimated_oil_price_model;
     temp1 = temp1 - (this.tax * temp1);
     temp2 = this.Estimated_Gas_ultimate_recovery_model * this.Estimated_gas_price_model
     temp2 = temp2 - (this.tax_gas * temp2);
-    temp1 = (temp1 + temp2) * this.Net_Revenue_model;
+    temp1 = (temp1 + temp2) * (this.nri_percentage / 100);
     this.Total_Potential_model = temp1 - ((this.Operating_Expenses_Ratio / 100) * temp1);
 
     // Months to Payout Calculation
@@ -213,7 +252,7 @@ export class AppComponent implements OnInit {
     var data2 = [];
     data2.push(0);
     if (isFinite(this.Total_Potential_model) && !isNaN(this.Total_Potential_model))
-      data2.push(parseFloat(this.Hypothetical_investment_model.toFixed(2)), parseFloat(this.Total_Potential_model.toFixed(2)));
+      data2.push(parseFloat(this.Hypothetical_investment_model.toFixed(2)), parseFloat(this.Total_Potential_model.toFixed(2)) ? parseFloat(this.Total_Potential_model.toFixed(2)) : null);
     else
       data2.push(0);
 
@@ -237,9 +276,6 @@ export class AppComponent implements OnInit {
 
     //this.lineChartLabels.push()
 
-
-    console.log(this.lineData);
-    console.log(this.lineChartLabels);
 
     /*     var ctx = document.getElementById("myChart");
         var myLineChart = new Chart(ctx, {
