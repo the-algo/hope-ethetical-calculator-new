@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
   public mobileView: boolean = false;
 
   public options = [
-    { stateName: "-- Select State --", taxValue: null },
+    { stateName: "-- Select State --", taxValue: [0, 0] },
     { stateName: "Alabama", taxValue: [4, 4] },
     { stateName: "Arkansas", taxValue: [5, 5] },
     { stateName: "Alaska", taxValue: [15, 10] },
