@@ -123,7 +123,7 @@ export class AppComponent implements OnInit {
       console.log(this.tax_gas);
     }
 
-    if (oil > 0 && gas > 0) {
+    if (oil >= 0 && gas >= 0) {
       this.tax = oil / 100;
       this.tax_gas = gas / 100;
       console.log(this.tax);
