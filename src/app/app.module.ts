@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { AccordionModule } from 'ng2-accordion';
 import { ChartsModule } from 'ng2-charts';
+import { PriceService } from './price.service';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -15,8 +17,10 @@ import { ChartsModule } from 'ng2-charts';
     CommonModule,
     FormsModule,
     AccordionModule,
-    ChartsModule
+    ChartsModule,
+    HttpModule
   ],
+  providers: [PriceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
+import { PriceService } from './price.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [DatePipe]
 })
 
 export class AppComponent implements OnInit {
@@ -105,9 +108,6 @@ export class AppComponent implements OnInit {
     this.allTax = item.split(",");
     this.tempOil = parseFloat(this.allTax[0]);
     this.tempGas = parseFloat(this.allTax[1]);
-
-    console.log(item);
-
     this.calculateTax(this.tempOil, this.tempGas);
     this.hypothetical();
   }
@@ -115,29 +115,34 @@ export class AppComponent implements OnInit {
   calculateTax(oil, gas) {
     if (oil > 0 && oil < 0.5) {
       this.tax = ((oil / 100) * this.Estimated_Oil_ultimate_recovery_model) / 100;
-      console.log(this.tax);
     }
 
     if (gas > 0 && gas < 0.5) {
       this.tax_gas = ((oil / 100) * this.Estimated_Oil_ultimate_recovery_model) / 100;
-      console.log(this.tax_gas);
     }
 
     if (oil >= 0 && gas >= 0) {
       this.tax = oil / 100;
       this.tax_gas = gas / 100;
-      console.log(this.tax);
-      console.log(this.tax_gas);
     }
   }
 
   // Dependency Injection
-  constructor() {
+  constructor(private price: PriceService, private datePipe: DatePipe) {
 
   }
 
   // Initializing the Data to Map and Panels
   ngOnInit() {
+    this.price.getOilPrice().subscribe(res => {
+      this.Estimated_oil_price_model = res.data[0][6]
+    })
+
+    this.price.getGasPrice().subscribe(res => {
+      this.Estimated_gas_price_model = res.data[0][6];
+      this.Estimated_gas_price_model = parseFloat(this.Estimated_gas_price_model.toFixed(2));
+    })
+
     this.hypothetical();
     if (window.screen.width <= 600) {
       this.mobileView = true;
