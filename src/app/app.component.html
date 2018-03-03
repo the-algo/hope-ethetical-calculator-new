@@ -26,7 +26,7 @@
                         <br>
 
                         <div class="row" *ngIf="!mobileView">
-                            <div class="col-md-6" style="padding: 20px 0px 10px 25px; border: 1px solid black">
+                            <div class="col-md-6" style="margin-top: 70px; padding: 20px 0px 10px 25px; border: 1px solid black">
                                 <div class="row">
                                     <div class="col-md-12" style="text-align:center; padding-bottom: 30px;">
                                         <h3>
@@ -35,7 +35,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row" style="min-height:45px">
+                                <div class="row" style="min-height:50px">
                                     <div class="col-md-6">
                                         <b>Investment Amount:</b>
                                     </div>
@@ -48,7 +48,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row" style="min-height:45px">
+                                <div class="row" style="min-height:50px">
                                     <div class="col-md-6">
                                         <b>Net Revenue Interest:</b>
                                     </div>
@@ -60,7 +60,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row" style="min-height:45px">
+                                <div class="row" style="min-height:50px">
                                     <div class="col-md-6">
                                         <b>Operating Expenses Ratio:</b>
                                     </div>
@@ -73,7 +73,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row" style="min-height:45px">
+                                <div class="row" style="min-height:50px">
                                     <div class="col-md-6">
                                         <b>State O&G Production Taxes:</b>
                                     </div>
@@ -105,10 +105,11 @@
                                         </div>
                                     </div>
                                 </div>
+                                <br>
                                 <div class="row">
                                     <div class="col-md-10">
                                         <canvas baseChart id="myChart" [options]="barChartOptions" [colors]="lineChartColors" [datasets]="lineData" [labels]="lineChartLabels"
-                                            [chartType]="'line'" height="200px"></canvas>
+                                            [chartType]="'line'" height="275px"></canvas>
                                     </div>
                                     <div class="col-md-2" style="margin-left: -15px; margin-top: 75px;">
                                         <div class="round round-lg hollow ">{{ roi_percent ? roi_percent : "0%" }}</div>

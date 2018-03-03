@@ -238,37 +238,56 @@ export class AppComponent implements OnInit {
 
 
     var data1 = [];
-    data1.push(0);
-
-    if (isFinite(this.Hypothetical_investment_model) && !isNaN(this.Hypothetical_investment_model))
-      data1.push(parseFloat(this.Hypothetical_investment_model.toFixed(2)), null);
-    else
-      data1.push(0);
-
-    this.lineData.push({ label: 'Investment Amount ($)', data: data1 });
-
     var data2 = [];
-    data2.push(0);
-    if (isFinite(this.Total_Potential_model) && !isNaN(this.Total_Potential_model))
-      data2.push(parseFloat(this.Hypothetical_investment_model.toFixed(2)), parseFloat(this.Total_Potential_model.toFixed(2)) ? parseFloat(this.Total_Potential_model.toFixed(2)) : null);
-    else
-      data2.push(0);
 
-    this.lineData.push({ label: 'Estimated Total Cash Flow ($)', data: data2 });
-    //this.lineData = data;
+
+    if ((isFinite(this.Hypothetical_investment_model) && !isNaN(this.Hypothetical_investment_model)) && (isFinite(this.Total_Potential_model) && !isNaN(this.Total_Potential_model))) {
+      if (this.Hypothetical_investment_model > this.Total_Potential_model && this.Total_Potential_model !== 0) {
+        data1.push(0, parseFloat(this.Total_Potential_model.toFixed(2)) ? parseFloat(this.Total_Potential_model.toFixed(2)) : null, parseFloat(this.Hypothetical_investment_model.toFixed(2)) ? parseFloat(this.Hypothetical_investment_model.toFixed(2)) : null);
+        this.lineData.push({ label: 'Investment Amount ($)', data: data1 });
+
+        data2.push(0, parseFloat(this.Total_Potential_model.toFixed(2)) ? parseFloat(this.Total_Potential_model.toFixed(2)) : null, null);
+        this.lineData.push({ label: 'Estimated Total Cash Flow ($)', data: data2 });
+      } else {
+        data1.push(0, parseFloat(this.Hypothetical_investment_model.toFixed(2)) ? parseFloat(this.Hypothetical_investment_model.toFixed(2)) : null, null);
+        this.lineData.push({ label: 'Investment Amount ($)', data: data1 });
+
+        data2.push(0, parseFloat(this.Hypothetical_investment_model.toFixed(2)) ? parseFloat(this.Hypothetical_investment_model.toFixed(2)) : null, parseFloat(this.Total_Potential_model.toFixed(2)) ? parseFloat(this.Total_Potential_model.toFixed(2)) : null);
+        this.lineData.push({ label: 'Estimated Total Cash Flow ($)', data: data2 });
+      }
+    } else {
+      this.lineData.push({ label: 'Investment Amount ($)', data: null });
+      this.lineData.push({ label: 'Estimated Total Cash Flow ($)', data: null });
+    }
+
 
     this.lineChartLabels.push('0');
+    if ((isFinite(this.Months_to_model) && !isNaN(this.Months_to_model)) && (isFinite(this.Months_to_cash_flow) && !isNaN(this.Months_to_cash_flow))) {
+      if (this.Months_to_model > this.Months_to_cash_flow && this.Months_to_cash_flow !== 0) {
+        this.lineChartLabels.push(this.Months_to_cash_flow.toFixed(1) + '');
+        this.lineChartLabels.push(this.Months_to_model.toFixed(1) + '')
+      } else {
+        this.lineChartLabels.push(this.Months_to_model !== 0 ? this.Months_to_model.toFixed(1) + '' : '0');
+        this.lineChartLabels.push(this.Months_to_cash_flow !== 0 ? this.Months_to_cash_flow.toFixed(1) + '' : '0')
+      }
+    }
 
-    if (isFinite(this.Months_to_model) && !isNaN(this.Months_to_model))
-      this.lineChartLabels.push(this.Months_to_model.toFixed(1) + '');
-    else
-      this.lineChartLabels.push('0');
 
 
-    if (isFinite(this.Months_to_cash_flow) && !isNaN(this.Months_to_cash_flow))
-      this.lineChartLabels.push(this.Months_to_cash_flow.toFixed(1) + '');
-    else
-      this.lineChartLabels.push('0');
+
+    /* 
+        if (isFinite(this.Months_to_model) && !isNaN(this.Months_to_model))
+          this.lineChartLabels.push(this.Months_to_model.toFixed(1) + '');
+        else
+          this.lineChartLabels.push('0');
+    
+    
+        if (isFinite(this.Months_to_cash_flow) && !isNaN(this.Months_to_cash_flow))
+          this.lineChartLabels.push(this.Months_to_cash_flow.toFixed(1) + '');
+        else
+          this.lineChartLabels.push('0');
+     */
+
 
     //this.lineChartLabels = label;
 
@@ -298,7 +317,39 @@ export class AppComponent implements OnInit {
             return txt;
           }
         }
-      }
+      },
+      scales: {
+        /*         yAxes: [{
+                  ticks: {
+                    beginAtZero: true,
+                    stepSize: 50000,
+                    callback: function (value, index, values) {
+                      return '$' + value;
+                    }
+                  }
+                }], */
+
+        yAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: '($)',
+            fontSize: 16,
+            fontStyle: "bold"
+          },
+          ticks: {
+            beginAtZero: true
+          }
+        }],
+
+        xAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Total Months of Cash Flow',
+            fontSize: 14,
+            fontStyle: "bold"
+          }
+        }]
+      },
     }
 
     this.barChartOptions = option;
