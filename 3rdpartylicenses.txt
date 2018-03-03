@@ -172,6 +172,8 @@ SOFTWARE.
 
 
 
+@angular/http@4.4.6 MIT
+
 chartjs-color@2.2.0 MIT
 Copyright (c) 2012 Heather Arthur
 
