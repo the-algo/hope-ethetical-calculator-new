@@ -79,9 +79,7 @@ export class AppComponent implements OnInit {
   public lineData: Array<any> = [{ label: '', data: [] }];
   public lineChartLabels: Array<any> = [];
 
-  public barChartOptions: any = {
-    legend: { position: 'bottom' }
-  }
+  public barChartOptions: any = {};
 
   public lineChartColors: Array<any> = [
     {
@@ -283,6 +281,27 @@ export class AppComponent implements OnInit {
           data: data
           //options: options
         }); */
+
+    var option = {
+      legend: { position: 'bottom' },
+      tooltips: {
+        callbacks: {
+          title: function (tooltipItems, data) {
+            return '';
+          },
+          label: function (tooltipItem, data) {
+            var datasetLabel = '';
+            var label = data.labels[tooltipItem.index];
+            var txt;
+            txt = " $ ";
+            txt += (+data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]).toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+            return txt;
+          }
+        }
+      }
+    }
+
+    this.barChartOptions = option;
   }
 
   // Converting the Decimal to Fraction Part
