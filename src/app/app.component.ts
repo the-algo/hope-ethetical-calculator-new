@@ -276,11 +276,12 @@ export class AppComponent implements OnInit {
 
     if ((isFinite(this.Hypothetical_investment_model) && !isNaN(this.Hypothetical_investment_model)) && (isFinite(this.Total_Potential_model) && !isNaN(this.Total_Potential_model))) {
       if (this.Hypothetical_investment_model > this.Total_Potential_model && this.Total_Potential_model !== 0) {
+        data3.push(0, parseFloat(this.Hypothetical_investment_model.toFixed(2)) ? parseFloat(this.Hypothetical_investment_model.toFixed(2)) : null, null);
+        this.lineData1.push({ label: 'Investment Amount ($)', data: data3 });
+
         data4.push(0, parseFloat(this.Total_Potential_model.toFixed(2)) ? parseFloat(this.Total_Potential_model.toFixed(2)) : null, null);
         this.lineData1.push({ label: 'Estimated Total Cash Flow ($)', data: data4 });
 
-        data3.push(0, parseFloat(this.Hypothetical_investment_model.toFixed(2)) ? parseFloat(this.Hypothetical_investment_model.toFixed(2)) : null, null);
-        this.lineData1.push({ label: 'Investment Amount ($)', data: data3 });
       } else {
         data3.push(0, parseFloat(this.Hypothetical_investment_model.toFixed(2)) ? parseFloat(this.Hypothetical_investment_model.toFixed(2)) : null);
         this.lineData1.push({ label: 'Investment Amount ($)', data: data3 });
