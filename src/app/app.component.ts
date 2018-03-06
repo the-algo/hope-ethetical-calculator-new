@@ -80,7 +80,9 @@ export class AppComponent implements OnInit {
   ];
 
   public lineData: Array<any> = [{ label: '', data: [] }];
+  public lineData1: Array<any> = [{ label: '', data: [] }];
   public lineChartLabels: Array<any> = [];
+  public lineChartLabels1: Array<any> = [];
 
   public barChartOptions: any = {};
 
@@ -192,8 +194,10 @@ export class AppComponent implements OnInit {
       this.calculateTax(this.tempOil, this.tempGas);
 
     this.lineData = [];
+    this.lineData1 = [];
     //this.lineChartLabels = [];
     this.lineChartLabels.length = 0;
+    this.lineChartLabels1.length = 0;
     let temp1 = 0, temp2 = 0;
 
     // Unit Equivalent Model Calculation
@@ -248,10 +252,11 @@ export class AppComponent implements OnInit {
 
     if ((isFinite(this.Hypothetical_investment_model) && !isNaN(this.Hypothetical_investment_model)) && (isFinite(this.Total_Potential_model) && !isNaN(this.Total_Potential_model))) {
       if (this.Hypothetical_investment_model > this.Total_Potential_model && this.Total_Potential_model !== 0) {
-        data1.push(0, parseFloat(this.Total_Potential_model.toFixed(2)) ? parseFloat(this.Total_Potential_model.toFixed(2)) : null, parseFloat(this.Hypothetical_investment_model.toFixed(2)) ? parseFloat(this.Hypothetical_investment_model.toFixed(2)) : null);
+        data1.push(null, null, parseFloat(this.Hypothetical_investment_model.toFixed(2)) ? parseFloat(this.Hypothetical_investment_model.toFixed(2)) : null);
         this.lineData.push({ label: 'Investment Amount ($)', data: data1 });
 
-        data2.push(0, parseFloat(this.Total_Potential_model.toFixed(2)) ? parseFloat(this.Total_Potential_model.toFixed(2)) : null, null);
+        data2.push(null, null, parseFloat(this.Total_Potential_model.toFixed(2)) ? parseFloat(this.Total_Potential_model.toFixed(2)) : null);
+        //data2.push(0, parseFloat(this.Total_Potential_model.toFixed(2)) ? parseFloat(this.Total_Potential_model.toFixed(2)) : null, parseFloat(this.Total_Potential_model.toFixed(2)) ? parseFloat(this.Total_Potential_model.toFixed(2)) : null);
         this.lineData.push({ label: 'Estimated Total Cash Flow ($)', data: data2 });
       } else {
         data1.push(0, parseFloat(this.Hypothetical_investment_model.toFixed(2)) ? parseFloat(this.Hypothetical_investment_model.toFixed(2)) : null, null);
@@ -266,14 +271,50 @@ export class AppComponent implements OnInit {
     }
 
 
+    var data3 = [];
+    var data4 = [];
+
+    if ((isFinite(this.Hypothetical_investment_model) && !isNaN(this.Hypothetical_investment_model)) && (isFinite(this.Total_Potential_model) && !isNaN(this.Total_Potential_model))) {
+      if (this.Hypothetical_investment_model > this.Total_Potential_model && this.Total_Potential_model !== 0) {
+        data4.push(0, parseFloat(this.Total_Potential_model.toFixed(2)) ? parseFloat(this.Total_Potential_model.toFixed(2)) : null, null);
+        this.lineData1.push({ label: 'Estimated Total Cash Flow ($)', data: data4 });
+
+        data3.push(0, parseFloat(this.Hypothetical_investment_model.toFixed(2)) ? parseFloat(this.Hypothetical_investment_model.toFixed(2)) : null, null);
+        this.lineData1.push({ label: 'Investment Amount ($)', data: data3 });
+      } else {
+        data3.push(0, parseFloat(this.Hypothetical_investment_model.toFixed(2)) ? parseFloat(this.Hypothetical_investment_model.toFixed(2)) : null);
+        this.lineData1.push({ label: 'Investment Amount ($)', data: data3 });
+
+        data4.push(0, parseFloat(this.Hypothetical_investment_model.toFixed(2)) ? parseFloat(this.Hypothetical_investment_model.toFixed(2)) : null, parseFloat(this.Total_Potential_model.toFixed(2)) ? parseFloat(this.Total_Potential_model.toFixed(2)) : null);
+        this.lineData1.push({ label: 'Estimated Total Cash Flow ($)', data: data4 });
+      }
+    } else {
+      this.lineData1.push({ label: 'Investment Amount ($)', data: null });
+      this.lineData1.push({ label: 'Estimated Total Cash Flow ($)', data: null });
+    }
+
+
     this.lineChartLabels.push('0');
     if ((isFinite(this.Months_to_model) && !isNaN(this.Months_to_model)) && (isFinite(this.Months_to_cash_flow) && !isNaN(this.Months_to_cash_flow))) {
       if (this.Months_to_model > this.Months_to_cash_flow && this.Months_to_cash_flow !== 0) {
-        this.lineChartLabels.push(this.Months_to_cash_flow.toFixed(1) + '');
-        this.lineChartLabels.push(this.Months_to_model.toFixed(1) + '')
+        this.lineChartLabels.push(this.Months_to_cash_flow !== 0 ? this.Months_to_cash_flow.toFixed(1) + '' : '0');
+        this.lineChartLabels.push(this.Months_to_model !== 0 ? this.Months_to_model.toFixed(1) + '' : '0')
       } else {
         this.lineChartLabels.push(this.Months_to_model !== 0 ? this.Months_to_model.toFixed(1) + '' : '0');
         this.lineChartLabels.push(this.Months_to_cash_flow !== 0 ? this.Months_to_cash_flow.toFixed(1) + '' : '0')
+      }
+    }
+
+    this.lineChartLabels1.push('0');
+    if ((isFinite(this.Months_to_model) && !isNaN(this.Months_to_model)) && (isFinite(this.Months_to_cash_flow) && !isNaN(this.Months_to_cash_flow))) {
+      if (this.Months_to_model > this.Months_to_cash_flow && this.Months_to_cash_flow !== 0) {
+        //this.lineChartLabels1.push(this.Months_to_cash_flow !== 0 ? this.Months_to_cash_flow.toFixed(1) + '' : '0');
+        this.lineChartLabels1.push(this.Months_to_model.toFixed(1) + '')
+      } else {
+        if (this.Months_to_model !== 0) {
+          this.lineChartLabels1.push(this.Months_to_model !== 0 ? this.Months_to_model.toFixed(1) + '' : '0');
+        }
+        this.lineChartLabels1.push(this.Months_to_cash_flow !== 0 ? this.Months_to_cash_flow.toFixed(1) + '' : '0')
       }
     }
 
@@ -324,16 +365,6 @@ export class AppComponent implements OnInit {
         }
       },
       scales: {
-        /*         yAxes: [{
-                  ticks: {
-                    beginAtZero: true,
-                    stepSize: 50000,
-                    callback: function (value, index, values) {
-                      return '$' + value;
-                    }
-                  }
-                }], */
-
         yAxes: [{
           scaleLabel: {
             display: true,

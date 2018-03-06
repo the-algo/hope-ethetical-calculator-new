@@ -106,6 +106,7 @@
                                     </div>
                                 </div>
                                 <br>
+<!-- 
                                 <div class="row">
                                     <div class="col-md-10">
                                         <canvas baseChart id="myChart" [options]="barChartOptions" [colors]="lineChartColors" [datasets]="lineData" [labels]="lineChartLabels"
@@ -116,6 +117,35 @@
                                         <br>
                                         <h2 style="padding-left:15px; text-align: center; font-weight:bold; color: rgba(8, 173, 63, 0.75)">ROI</h2>
                                     </div>
+                                </div>
+ -->
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <canvas baseChart id="myChart1" [options]="barChartOptions" [colors]="lineChartColors" [datasets]="lineData" [labels]="lineChartLabels"
+                                            [chartType]="'line'" height="275px"></canvas>
+                                    </div>
+                                    <div class="col-md-2" style="margin-left: -15px; margin-top: 75px;">
+                                        <div class="round round-lg hollow ">{{ roi_percent ? roi_percent : "0%" }}</div>
+                                        <br>
+                                        <h2 style="padding-left:15px; text-align: center; font-weight:bold; color: rgba(8, 173, 63, 0.75)">ROI</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-10">
+                                    <canvas baseChart id="myChart2" [options]="barChartOptions" [colors]="lineChartColors" [datasets]="lineData1" [labels]="lineChartLabels1"
+                                        [chartType]="'line'" height="275px"></canvas>
+                                </div>
+                                <div class="col-md-2" style="margin-left: -15px; margin-top: 75px;">
+                                    <div class="round round-lg hollow ">{{ roi_percent ? roi_percent : "0%" }}</div>
+                                    <br>
+                                    <h2 style="padding-left:15px; text-align: center; font-weight:bold; color: rgba(8, 173, 63, 0.75)">ROI</h2>
                                 </div>
                             </div>
                         </div>
