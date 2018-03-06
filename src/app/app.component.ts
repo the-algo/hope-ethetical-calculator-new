@@ -186,6 +186,24 @@ export class AppComponent implements OnInit {
   public tempOil = 0;
   public tempGas = 0;
 
+  display = 'none';
+  graph = false;
+  title = '';
+  openModal(graph: string) {
+    this.title = graph;
+    if (graph === 'Graph1') {
+      this.graph = true;
+    } else {
+      this.graph = false;
+    }
+    this.display = 'block';
+  }
+
+  onCloseHandled() {
+    this.display = 'none';
+  }
+
+
 
   // Calculate Hypothetical Price, Production, and Cash Flow Scenarios
   hypothetical() {
