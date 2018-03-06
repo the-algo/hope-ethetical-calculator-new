@@ -255,8 +255,8 @@ export class AppComponent implements OnInit {
         data1.push(null, null, parseFloat(this.Hypothetical_investment_model.toFixed(2)) ? parseFloat(this.Hypothetical_investment_model.toFixed(2)) : null);
         this.lineData.push({ label: 'Investment Amount ($)', data: data1 });
 
-        data2.push(null, null, parseFloat(this.Total_Potential_model.toFixed(2)) ? parseFloat(this.Total_Potential_model.toFixed(2)) : null);
-        //data2.push(0, parseFloat(this.Total_Potential_model.toFixed(2)) ? parseFloat(this.Total_Potential_model.toFixed(2)) : null, parseFloat(this.Total_Potential_model.toFixed(2)) ? parseFloat(this.Total_Potential_model.toFixed(2)) : null);
+        //data2.push(null, null, parseFloat(this.Total_Potential_model.toFixed(2)) ? parseFloat(this.Total_Potential_model.toFixed(2)) : null);
+        data2.push(0, parseFloat(this.Total_Potential_model.toFixed(2)) ? parseFloat(this.Total_Potential_model.toFixed(2)) : null, parseFloat(this.Total_Potential_model.toFixed(2)) ? parseFloat(this.Total_Potential_model.toFixed(2)) : null);
         this.lineData.push({ label: 'Estimated Total Cash Flow ($)', data: data2 });
       } else {
         data1.push(0, parseFloat(this.Hypothetical_investment_model.toFixed(2)) ? parseFloat(this.Hypothetical_investment_model.toFixed(2)) : null, null);
