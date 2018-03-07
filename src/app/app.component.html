@@ -106,23 +106,15 @@
                                     </div>
                                 </div>
                                 <br>
-                                <br>
-                                <br>
                                 <div class="row">
-                                    <div class="col-md-offset-2 col-md-3">
-                                        <button type="button" class="btn btn-info btn-block" (click)="openModal('Graph1')">View Graph 1</button>
+                                    <div class="col-md-10">
+                                        <canvas baseChart id="myChart2" [options]="barChartOptions" [colors]="lineChartColors" [datasets]="lineData1" [labels]="lineChartLabels1"
+                                            [chartType]="'line'" height="280px"></canvas>
                                     </div>
-
-                                    <div class="col-md-3 col-md-offset-2">
-                                        <button type="button" class="btn btn-info btn-block" (click)="openModal('Graph2')">View Graph 2</button>
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col-md-2 col-md-offset-4" style="padding-left: 35px; margin-top: 25px;">
+                                    <div class="col-md-2" style="margin-left: -15px; margin-top: 90px;">
                                         <div class="round round-lg hollow ">{{ roi_percent ? roi_percent : "0%" }}</div>
                                         <br>
-                                        <h2 style="padding-left:25px; text-align: center; font-weight:bold; color: rgba(8, 173, 63, 0.75)">ROI</h2>
+                                        <h2 style="padding-left:15px; text-align: center; font-weight:bold; color: rgba(8, 173, 63, 0.75)">ROI</h2>
                                     </div>
                                 </div>
                             </div>
@@ -175,22 +167,16 @@
                                 </div>
 
                                 <br>
-                                <br>
 
                                 <div class="row">
-                                    <div class="col-xs-2 col-xs-offset-4">
-                                        <div style="text-align: center" class="round round-sm holl">{{ roi_percent ? roi_percent : "0%" }}</div>
+                                    <div class="col-xs-10">
+                                        <canvas baseChart id="myChart2" [options]="barChartOptions" [colors]="lineChartColors" [datasets]="lineData1" [labels]="lineChartLabels1"
+                                            [chartType]="'line'" height="300px"></canvas>
+                                    </div>
+                                    <div class="col-xs-2" style="margin-top: 35px;">
+                                        <div style="margin-left: -15px; text-align: center" class="round round-sm holl">{{ roi_percent ? roi_percent : "0%" }}</div>
                                         <br>
-                                        <h3 style="padding-left: 20px; font-weight:bold; color: rgba(8, 173, 63, 0.75)">ROI</h3>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-xs-6">
-                                        <button type="button" class="btn btn-info btn-block" (click)="openModal('Graph1')">View Graph 1</button>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <button type="button" class="btn btn-info btn-block" (click)="openModal('Graph2')">View Graph 2</button>
+                                        <h3 style="margin-left: -10px; font-weight:bold; color: rgba(8, 173, 63, 0.75)">ROI</h3>
                                     </div>
                                 </div>
                                 <!-- 
@@ -412,7 +398,7 @@
         </div>
     </div>
 
-
+    <!-- 
     <div class="backdrop" [ngStyle]="{'display':display}"></div>
     <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
         <div class="modal-dialog" role="document">
@@ -443,6 +429,7 @@
             </div>
         </div>
     </div>
+     -->
 </div>
 
 

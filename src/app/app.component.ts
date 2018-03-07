@@ -79,7 +79,9 @@ export class AppComponent implements OnInit {
     { stateName: "Wyoming", taxValue: [6, 6] },
   ];
 
-  public lineData: Array<any> = [{ label: '', data: [] }];
+  public lineData: Array<any> = [{
+    label: '', data: [], pointStyle: 'circle'
+  }];
   public lineData1: Array<any> = [{ label: '', data: [] }];
   public lineChartLabels: Array<any> = [];
   public lineChartLabels1: Array<any> = [];
@@ -186,9 +188,10 @@ export class AppComponent implements OnInit {
   public tempOil = 0;
   public tempGas = 0;
 
-  display = 'none';
+/*   display = 'none';
   graph = false;
   title = '';
+  
   openModal(graph: string) {
     this.title = graph;
     if (graph === 'Graph1') {
@@ -201,7 +204,7 @@ export class AppComponent implements OnInit {
 
   onCloseHandled() {
     this.display = 'none';
-  }
+  } */
 
 
 
@@ -367,7 +370,12 @@ export class AppComponent implements OnInit {
         }); */
 
     var option = {
-      legend: { position: 'bottom' },
+      legend: {
+        position: 'bottom',
+        labels: {
+          usePointStyle: true
+        }
+      },
       tooltips: {
         callbacks: {
           title: function (tooltipItems, data) {
@@ -405,6 +413,16 @@ export class AppComponent implements OnInit {
           }
         }]
       },
+      elements:
+        {
+          point:
+            {
+              radius: 6,
+              hitRadius: 6,
+              hoverRadius: 6,
+              hoverBorderWidth: 1
+            }
+        }
     }
 
     this.barChartOptions = option;
