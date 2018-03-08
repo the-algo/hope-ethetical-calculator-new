@@ -82,7 +82,7 @@ export class AppComponent implements OnInit {
   public lineData: Array<any> = [{
     label: '', data: [], pointStyle: 'circle'
   }];
-  public lineData1: Array<any> = [{ label: '', data: [] }];
+  public lineData1: Array<any> = [{ label: '', data: [], pointStyle: 'circle' }];
   public lineChartLabels: Array<any> = [];
   public lineChartLabels1: Array<any> = [];
 
@@ -415,16 +415,17 @@ export class AppComponent implements OnInit {
           }
         }]
       },
-      elements:
-        {
-          point:
-            {
-              radius: 6,
-              hitRadius: 6,
-              hoverRadius: 6,
-              hoverBorderWidth: 1
-            }
+      elements: {
+        point: {
+          radius: 6,
+          hitRadius: 6,
+          hoverRadius: 6,
+          hoverBorderWidth: 1
+        },
+        line: {
+          tension: 0
         }
+      }
     }
 
     this.barChartOptions = option;
