@@ -225,3 +225,7 @@ accordion-heading {
       top:0;
     background: linear-gradient(to right top, lightgrey 50%, transparent 50%);
 }
+
+.input-group-addon{
+    padding: 0px 1px 0px 2px;
+}
