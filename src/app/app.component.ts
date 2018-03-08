@@ -90,7 +90,7 @@ export class AppComponent implements OnInit {
 
   public lineChartColors: Array<any> = [
     {
-      backgroundColor: 'rgba(146,206,80,1.0)',
+      backgroundColor: 'rgba(146,206,80,0.6)',
       borderColor: 'rgba(146,206,80,1.0)',
       pointBackgroundColor: 'rgba(146,206,80,1.0)',
       pointBorderColor: '#fff',
@@ -98,7 +98,7 @@ export class AppComponent implements OnInit {
       pointHoverBorderColor: 'rgba(146,206,80,1.0)'
     },
     {
-      backgroundColor: 'rgba(51,129,199,1.0)',
+      backgroundColor: 'rgba(51,129,199,0.4)',
       borderColor: 'rgba(51,129,199,1.0)',
       pointBackgroundColor: 'rgba(51,129,199,1.0)',
       pointBorderColor: '#fff',
@@ -188,23 +188,23 @@ export class AppComponent implements OnInit {
   public tempOil = 0;
   public tempGas = 0;
 
-/*   display = 'none';
-  graph = false;
-  title = '';
-  
-  openModal(graph: string) {
-    this.title = graph;
-    if (graph === 'Graph1') {
-      this.graph = true;
-    } else {
-      this.graph = false;
+  /*   display = 'none';
+    graph = false;
+    title = '';
+    
+    openModal(graph: string) {
+      this.title = graph;
+      if (graph === 'Graph1') {
+        this.graph = true;
+      } else {
+        this.graph = false;
+      }
+      this.display = 'block';
     }
-    this.display = 'block';
-  }
-
-  onCloseHandled() {
-    this.display = 'none';
-  } */
+  
+    onCloseHandled() {
+      this.display = 'none';
+    } */
 
 
 
@@ -377,6 +377,8 @@ export class AppComponent implements OnInit {
         }
       },
       tooltips: {
+        displayColors: false,
+        isHtml: true,
         callbacks: {
           title: function (tooltipItems, data) {
             return '';
@@ -385,7 +387,7 @@ export class AppComponent implements OnInit {
             var datasetLabel = '';
             var label = data.labels[tooltipItem.index];
             var txt;
-            txt = " $ ";
+            txt = "PAYOUT  $";
             txt += (+data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]).toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
             return txt;
           }
