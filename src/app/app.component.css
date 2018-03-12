@@ -229,3 +229,11 @@ accordion-heading {
 .input-group-addon{
     padding: 0px 1px 0px 2px;
 }
+
+.frame{
+    min-height:40px; 
+    border:none; 
+    margin-top: -10px; 
+    margin-left: -32px; 
+    margin-bottom: 10px
+}
