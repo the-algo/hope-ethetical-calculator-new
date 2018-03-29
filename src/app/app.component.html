@@ -6,21 +6,27 @@
                     <accordion-heading id="accordion1" (click)="onclicktoggle('accordion1')">
                         <div class="panel-heading">
                             <h2 class="panel-title">
-                                <span id="icon1" class="glyphicon glyphicon-minus"></span> OWS Oil and Gas Cash Flow Calculator
+                                <div class="row" id="heading">
+                                    <div class="col-md-6">
+                                        <span id="icon1" class="glyphicon glyphicon-minus"></span> OWS Cash Flow Calculator
+                                    </div>
+                                   <div class="col-md-6" style="text-align: right;">
+                                         <img src="assets/logo.png" height="45px"> 
+                                   </div>   
+                                </div>
+                           
                             </h2>
                         </div>
                     </accordion-heading>
                     <div class="panel-body">
 
                         <div class="row">
-                            <div class="col-md-9">
+                            <div class="col-md-12">
                                 <h4>
                                     Input values into this interactive calculator to create unique investment and cash flow scenarios.
                                 </h4>
                             </div>
-                            <div class="col-md-3">
-                                <img src="assets/logo.png" width="200px" />
-                            </div>
+                           
                         </div>
 
                         <br>
@@ -64,7 +70,7 @@
 
                                 <div class="row" style="min-height:50px">
                                     <div class="col-md-6">
-                                        <b>Production Expenses Ratio:</b>
+                                        <b>Production Expenses:</b>
                                         <i class="glyphicon glyphicon-question-sign" title=""></i>
                                     </div>
                                     <div class="col-md-5">
@@ -120,13 +126,13 @@
                                         <div class="row">
                                             <div class="col-md-1"></div>
                                             <div id="arrow" class="col-md-5" style="text-align: center">
-                                                Estimated Monthly Income
+                                                Est. Monthly Income
                                                 <i class="glyphicon glyphicon-question-sign" title=""></i>
                                                 <br>
                                                 <span style="font-weight: bold">{{ Potential_Monthly_model | currency:'USD' : true : '1.2-2' }}</span>
                                             </div>
                                             <div class="col-md-6" style="text-align: center">
-                                                Estimated Total Net Cash Flow
+                                                Est. Net Cash Flow
                                                 <i class="glyphicon glyphicon-question-sign" title=""></i>
                                                 <br>
                                                 <span style="color: green; font-weight: bold">{{ Total_Potential_model | currency:'USD' : true : '1.2-2' }}</span>
@@ -364,7 +370,7 @@
                             <div class="col-md-5">
                                 <div class="row" style="min-height:45px">
                                     <div class="col-md-8">
-                                        <b>Estimated Oil Price:</b>
+                                        <b>Your Oil Price:</b>
                                         <i class="glyphicon glyphicon-question-sign" title=""></i>
 
                                     </div>
@@ -384,7 +390,7 @@
 
                                 <div class="row">
                                     <div class="col-md-8">
-                                        <b>Estimated Daily Oil Production:</b>
+                                        <b>Est. Daily Oil Production:</b>
                                         <i class="glyphicon glyphicon-question-sign" title=""></i>
 
                                     </div>
@@ -400,7 +406,7 @@
 
                                 <div class="row">
                                     <div class="col-md-8">
-                                        <b>Estimated Total Oil Production:</b>
+                                        <b>Cumulative Oil:</b>
                                         <i class="glyphicon glyphicon-question-sign" title=""></i>
 
                                     </div>
@@ -431,7 +437,7 @@
                             <div class="col-md-5">
                                 <div class="row" style="min-height:45px">
                                     <div class="col-md-8">
-                                        <b>Estimated Gas Price:</b>
+                                        <b>Your Gas Price:</b>
                                         <i class="glyphicon glyphicon-question-sign" title=""></i>
 
                                     </div>
@@ -451,7 +457,7 @@
 
                                 <div class="row">
                                     <div class="col-md-8">
-                                        <b>Estimated Daily Gas Production:</b>
+                                        <b>Est. Daily Gas Production:</b>
                                         <i class="glyphicon glyphicon-question-sign" title=""></i>
 
                                     </div>
@@ -467,7 +473,7 @@
 
                                 <div class="row" style="min-height:50px">
                                     <div class="col-md-8">
-                                        <b>Estimated Total Gas Production:</b>
+                                        <b>Cumulative Gas:</b>
                                         <i class="glyphicon glyphicon-question-sign" title=""></i>
 
                                     </div>

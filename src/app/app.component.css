@@ -2,6 +2,14 @@
     font-size: 16px;
 }
 
+#heading{
+    font-size: 25px;
+    font-weight: bold;
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+}
+
 hr {
     border-top: 1px solid black;
 }
