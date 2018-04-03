@@ -147,6 +147,7 @@ export class AppComponent implements OnInit {
       this.Estimated_gas_price_model = parseFloat(this.Estimated_gas_price_model.toFixed(2));
     })
 
+
     this.hypothetical();
     if (window.screen.width <= 600) {
       this.mobileView = true;
@@ -155,6 +156,7 @@ export class AppComponent implements OnInit {
     }
   }
 
+  
 
   /*-------------------------------------------------------------------------------------------------------------------*/
 
